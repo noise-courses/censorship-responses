@@ -1,0 +1,34 @@
+name: lint
+
+on:
+  push:
+  pull_request:
+
+# Placeholder lint: verifies that any week-NN.md files have the required
+# Summary and Questions sections. Extend as needed.
+
+jobs:
+  markdown:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify response files have required sections
+        run: |
+          missing=0
+          shopt -s nullglob
+          for f in week-*.md; do
+            if ! grep -q -i "^\*\*Summary\*\*" "$f"; then
+              echo "::error file=$f::missing **Summary** section"
+              missing=1
+            fi
+            if ! grep -q -i "^\*\*Questions\*\*" "$f"; then
+              echo "::error file=$f::missing **Questions** section"
+              missing=1
+            fi
+          done
+          if [ "$missing" -ne 0 ]; then
+            echo "One or more response files are missing required sections."
+            exit 1
+          fi
+          echo "All response files pass structure check."
