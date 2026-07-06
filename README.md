@@ -17,7 +17,8 @@ and Online Speech course.
 
 Each week, before the class where the reading is discussed:
 
-1. Copy `0-template.md` to `week-NN.md` (e.g. `week-01.md`, `week-02.md`).
+1. Create a new file `week-NN.md` (e.g. `week-01.md`, `week-02.md`) —
+   copy the response format from the code block below.
 2. Fill in the **Summary** and **Questions** sections.
 3. Commit and push.
 
@@ -35,8 +36,6 @@ A red X means you're missing a required section — fix it and push again.
 **Questions**
 2. What questions do you have? (minimum 1-2 sentences)
 ```
-
-The full-fidelity copy is in [`0-template.md`](0-template.md).
 
 ## What counts
 
