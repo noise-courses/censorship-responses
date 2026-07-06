@@ -4,8 +4,9 @@ on:
   push:
   pull_request:
 
-# Placeholder lint: verifies that any week-NN.md files have the required
-# Summary and Questions sections. Extend as needed.
+# Placeholder lint: verifies that any week-NN.md files have a Questions
+# section (Summary is no longer required — instructor removed that
+# expectation in class on 2026-07-06).
 
 jobs:
   markdown:
@@ -18,17 +19,13 @@ jobs:
           missing=0
           shopt -s nullglob
           for f in week-*.md; do
-            if ! grep -q -i "^\*\*Summary\*\*" "$f"; then
-              echo "::error file=$f::missing **Summary** section"
-              missing=1
-            fi
             if ! grep -q -i "^\*\*Questions\*\*" "$f"; then
               echo "::error file=$f::missing **Questions** section"
               missing=1
             fi
           done
           if [ "$missing" -ne 0 ]; then
-            echo "One or more response files are missing required sections."
+            echo "One or more response files are missing the Questions section."
             exit 1
           fi
           echo "All response files pass structure check."
